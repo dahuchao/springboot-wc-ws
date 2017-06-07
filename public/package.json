@@ -1,0 +1,17 @@
+{
+  "name": "etude-x-tag",
+  "version": "1.0.0",
+  "description": "Etude du frame-work x-tag",
+  "main": "index.js",
+  "author": "dahu.chao",
+  "license": "ISC",
+  "dependencies": {
+    "socket.io": "^2.0.2",
+    "sockjs-client": "^1.1.4",
+    "webcomponentsjs": "^1.0.2",
+    "x-tag": "^1.5.11"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

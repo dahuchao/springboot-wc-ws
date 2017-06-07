@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="/node_modules/x-tag/dist/x-tag-core.min.js"></script>
+  <script src="/node_modules/socket.io-client/dist/socket.io.js"></script>
+  <script>
+    (function (window, document) {
+      var liMoyen;
+      var ws;
+      xtag.register('x-moyens', {
+        lifecycle: {
+          created: function () {
+            console.log("Composant web de recherche de moyens de paiement");
+            ws = io('http://localhost:8080/methode');
+            ws.on('connect', function(){
+			    console.log('connect');
+			});
+            ws.on('disconnect', function(){
+			    console.log('close');
+			});
+          }
+        },
+        methods: {
+          lister: function () {
+  			ws.emit("transaction", JSON.stringify({ idTransaction: "457821", montant: "239,99"}));
+          },
+          onMoyenListe: function (moyen) {
+            console.log("nouveau moyen de paiment: " + JSON.stringify(moyen));
+            liMoyen = document.createElement("li");
+            liMoyen.textContent = moyen.libelle;
+            ulMoyen.appendChild(liMoyen);
+          }
+        },
+        accessors: {
+          montant: {
+            attribute: {},
+            get: function () {
+            },
+            set: function (montant) {
+              console.log("montant: " + JSON.stringify(montant));
+            }
+          }
+        },
+        content: "<ul id='ulMoyen'><li>test</li></ul>"
+      });
+    })(window, document);
+  </script>
+</head>
+
+</html>
