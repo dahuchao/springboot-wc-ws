@@ -16,10 +16,12 @@ public class MethodeHandler extends TextWebSocketHandler {
 	public void handleTextMessage(WebSocketSession session, TextMessage message) {
 		try {
 			// ...
-			System.out.println("test: " + message.toString());
+			Gson gson = new Gson();
+			MethodeDemande demande = gson.fromJson(message.getPayload(),
+					MethodeDemande.class);
+			System.out.println("demande: " + demande);
 			MethodeMessage moyen = new MethodeMessage("CB", "Carte bancaire",
 					"/icon.png", "/paiement/cb");
-			Gson gson = new Gson();
 			session.sendMessage(new TextMessage(gson.toJson(moyen)));
 		} catch (IOException e) {
 			e.printStackTrace();
